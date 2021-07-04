@@ -1,4 +1,4 @@
-var apiKey = "49eb16dfa1cec272cd9a1afb144b9378"
+
 var searchBtn = document.querySelector("#search-button")
 //target form for search input
 function searchInput() {
