@@ -1,7 +1,10 @@
-.container div{
+.container-fluid div{
     display: flex;
   justify-content: space-around;
   text-align: center; 
 }
 
 
+.form-control-sm {
+  max-width: 250px;
+}
