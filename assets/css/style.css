@@ -1,7 +1,7 @@
-.container-fluid div{
-    display: flex;
+header .container-fluid div{
+  display: flex;
   justify-content: space-around;
-  text-align: center; 
+  text-align: center;
 }
 
 
