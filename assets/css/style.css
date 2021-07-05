@@ -4,7 +4,20 @@ header .container-fluid div{
   text-align: center;
 }
 
-
-.form-control-sm {
-  max-width: 250px;
+.forecast-box {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: left;
 }
+
+.forecast-card {
+border-style: solid 2px;
+color: white;
+height: 250px;
+width: 175px;
+background-color:darkblue;
+margin: 2%;
+
+}
+

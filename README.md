@@ -1,1 +1,3 @@
-# weather-app
+# Weather Dashboard 
+
+This application used 
