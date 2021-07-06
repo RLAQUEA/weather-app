@@ -16,8 +16,15 @@ align-items: stretch;
 border-style: solid 2px;
 color: white;
 height: 250px;
-width: 175px;
+width: 200px;
 background-color:darkblue;
 margin: 2%;
 }
 
+.forecast-title {
+  font-size: 25px;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  margin-left: 40%;
+}

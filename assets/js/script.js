@@ -11,7 +11,7 @@ $(document).ready(function () {
         var citySearch = $("#search-input").val();
         weatherData(citySearch);
     });
-    
+
     function addCity(text) {//will add to list of prior searches
         var li = $("<button>").text(text);
         $(".cities").append(li);
@@ -69,8 +69,8 @@ $(document).ready(function () {
                     var card = $("<div>").addClass("forecast-card")
                     console.log(response.daily[i].temp.day);
                     var temp = $("<h3>").text("Temp: " + response.daily[i].temp.day);
-                    var wind = $("<h3>").text(response.daily[i].wind_speed);
-                    var humidity = $("<h3>").text(response.daily[i].humidity);
+                    var wind = $("<h3>").text("Wind: " + response.daily[i].wind_speed + "MPH");
+                    var humidity = $("<h3>").text("Humidity: " + response.daily[i].humidity + "%");
                     var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + response.daily[i].weather[0].icon + ".png");
                     $(card).append(temp, wind, humidity, img);
                     $("#forecast").append(card);
