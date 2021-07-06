@@ -11,14 +11,13 @@ $(document).ready(function () {
         var citySearch = $("#search-input").val();
         weatherData(citySearch);
     });
-
+    
     function addCity(text) {//will add to list of prior searches
         var li = $("<button>").text(text);
         $(".cities").append(li);
     }
 
     function weatherData(citySearch) {//this will look for the weather data for the city searched
-
         var titleData = "";
         var windData = "";
         var humidData = "";
@@ -30,13 +29,11 @@ $(document).ready(function () {
         })
             .then(function (allWeather) {//"allWeather" is data returned from weather api
                 console.log(allWeather);
-
                 if (cities.indexOf(citySearch) === -1) {
                     cities.push(citySearch);//push each search to localstorage "cities" array
                     window.localStorage.setItem("cities", JSON.stringify(cities));//this will add a search history row by search input
                     addCity(citySearch);
                 }
-
                 // stores weather aspects that are retrieved from api  
                 var title = $("<h3>").text(allWeather.name + " (" + new Date().toLocaleDateString() + ")");
                 var wind = $("<p>").addClass("card-text").text("Wind: " + allWeather.wind.speed + " MPH");
@@ -52,7 +49,6 @@ $(document).ready(function () {
                 lon = allWeather.coord.lon;
                 console.log(lat);
                 console.log(lon);
-                // console.log(uvi);
                 // appends and adds aspects to page
                 cardBody.append(title, temp, humid, wind);
                 $("#weather-today").append(cardBody);
@@ -66,23 +62,21 @@ $(document).ready(function () {
             method: "GET",
         })
             .then(function (response) {
-            var uvi = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi + "");
-            console.log(response.daily[0].temp.day);
-            console.log(response);
-            for (var i = 0; i < response.daily.length; i++) {
-            var card = $("<div>").addClass("forecast-card")
-            console.log(response.daily[i].temp.day);
-            var temp = $("<h3>").text("Temp: " + response.daily[i].temp.day);
-            var wind = $("<h3>").text(response.daily[i].wind_speed);
-            var humidity = $("<h3>").text(response.daily[i].humidity);
-            var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + response.daily[i].weather[0].icon + ".png");
-            $(card).append(temp, wind, humidity, img);
-            $("#forecast").append(card);
-            }
-            $("#weather-today").append(uvi);
+                var uvi = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi + "");
+                console.log(response.daily[0].temp.day);
+                console.log(response);
+                for (var i = 0; i < response.daily.length; i++) {
+                    var card = $("<div>").addClass("forecast-card")
+                    console.log(response.daily[i].temp.day);
+                    var temp = $("<h3>").text("Temp: " + response.daily[i].temp.day);
+                    var wind = $("<h3>").text(response.daily[i].wind_speed);
+                    var humidity = $("<h3>").text(response.daily[i].humidity);
+                    var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + response.daily[i].weather[0].icon + ".png");
+                    $(card).append(temp, wind, humidity, img);
+                    $("#forecast").append(card);
+                }
+                $("#weather-today").append(uvi);
             })
-            // response.daily.weather.icon make like an image tage
-            
     }
 
     function displayCities() {
