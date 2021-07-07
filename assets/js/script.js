@@ -17,13 +17,12 @@ $(document).ready(function () {
     }
     var citiesClass = $(".cities");
     
-        citiesClass.on("click", test);
+        citiesClass.on("click", getTarget);
 
-        function test(event) {
+        function getTarget(event) {
             event.preventDefault();
             var citiesBtn = event.target;
-            console.log(citiesClass);
-            console.log(event.target);
+        
             weatherData(citiesBtn.innerText);
         }
 
