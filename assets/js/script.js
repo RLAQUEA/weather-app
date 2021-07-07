@@ -1,10 +1,9 @@
-
+//this makes sure the application doesn't run until page DOM is ready 
 $(document).ready(function () {
 
     var cities;
     var lat = "";
     var lon = "";
-    var fiveDayForecast = "";
     var APIKEY = "49eb16dfa1cec272cd9a1afb144b9378"
 
     $("#search-button").on("click", function () {//#search-button takes value from #search-input and passes it as var citySearch to weatherData()
@@ -16,6 +15,17 @@ $(document).ready(function () {
         var li = $("<button>").text(text);
         $(".cities").append(li);
     }
+    var citiesClass = $(".cities");
+    
+        citiesClass.on("click", test);
+
+        function test(event) {
+            event.preventDefault();
+            var citiesBtn = event.target;
+            console.log(citiesClass);
+            console.log(event.target);
+            weatherData(citiesBtn.innerText);
+        }
 
     function weatherData(citySearch) {//this will look for the weather data for the city searched
         var titleData = "";
@@ -28,7 +38,7 @@ $(document).ready(function () {
             method: "GET", //get is used to retrieve the data object needed
         })
             .then(function (allWeather) {//"allWeather" is data returned from weather api
-                console.log(allWeather);
+        
                 if (cities.indexOf(citySearch) === -1) {
                     cities.push(citySearch);//push each search to localstorage "cities" array
                     window.localStorage.setItem("cities", JSON.stringify(cities));//this will add a search history row by search input
@@ -47,15 +57,15 @@ $(document).ready(function () {
                 tempData = $(temp).text();
                 lat = allWeather.coord.lat;
                 lon = allWeather.coord.lon;
-                console.log(lat);
-                console.log(lon);
+        
                 // appends and adds aspects to page
                 cardBody.append(title, temp, humid, wind);
+                $("#weather-today").text("");
                 $("#weather-today").append(cardBody);
                 forecast(allWeather.coord.lat, allWeather.coord.lon);
             });
     }
-
+//this requests the uv index from the api using latitude and longitude
     function forecast(lat, lon) {
         $.ajax({
             url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKEY + "&units=imperial",
@@ -63,8 +73,7 @@ $(document).ready(function () {
         })
             .then(function (response) {
                 var uvi = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi + "");
-                console.log(response.daily[0].temp.day);
-                console.log(response);
+                $("#forecast").text("");
                 for (var i = 0; i < response.daily.length; i++) {
                     var card = $("<div>").addClass("forecast-card")
                     console.log(response.daily[i].temp.day);
