@@ -33,7 +33,7 @@ $(document).ready(function () {
         var tempData = "";
 
         $.ajax({// api call that retrieves weather based on searched city
-            url: "http://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + APIKEY + "&units=imperial",
+            url: "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + APIKEY + "&units=imperial",
             method: "GET", //get is used to retrieve the data object needed
         })
             .then(function (allWeather) {//"allWeather" is data returned from weather api
